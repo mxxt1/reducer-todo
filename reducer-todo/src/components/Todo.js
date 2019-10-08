@@ -1,14 +1,36 @@
-import React from 'react'
+import React, {useReducer, useState} from 'react'
+import { reducer, initialState } from '../reducers/toDoReducer'
+
 
 const Todo = (props) => {
-    console.log(props)
+    const [{todos}, dispatch] = useReducer(reducer, initialState);
+    const [completed, setCompleted] = useState(props.completed)
+    console.log(todos)
+
+
+    const toggleHandler = event => {
+        event.preventDefault();
+        setCompleted(props.id)
+        dispatch({type: 'TOGGLE_COMPLETED', payload:completed})
+    }
+
+
     return (
-        <div>
-            <h2>{props.item}</h2>
-            <p>{props.completed}</p>
+        <div onClick={toggleHandler}>
+            
             <p>{props.id}</p>
+            <h1>{props.item}</h1>
+            
+            {props.completed ? (
+                <h3>Complete</h3>
+            ):(
+            <h3>Incomplete</h3>    
+            )}
+            
+
         </div>
     )
 }
 
 export default Todo
+// onClick={() =>}

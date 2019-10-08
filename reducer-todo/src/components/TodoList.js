@@ -6,8 +6,9 @@ const TodoList = () => {
 
     const [{todos}, dispatch] = useReducer(reducer, initialState);
     const [newTodo, setNewTodo] = useState(''); 
+    const [toggleItem, setToggleItem] = useState('');
 
-    console.log(todos);
+        console.log(todos);
 
     const changeHandler = event =>{
         setNewTodo(event.target.value)
@@ -18,6 +19,14 @@ const TodoList = () => {
         dispatch({type: 'ADD_TODO', payload: newTodo});
         setNewTodo('');
     }
+
+    // const toggleHandler = event => {
+    //     event.preventDefault();
+    //     // setToggleItem(item.id);
+    //     // console.log(toggleItem);
+    //     dispatch({type:'TOGGLE_COMPLETED', dispatch:toggleItem});
+    //     setToggleItem('');
+    // }
 
 
 
@@ -32,15 +41,19 @@ const TodoList = () => {
                     value={newTodo}
                     onChange={changeHandler}
                 />
+
                 <button onClick={submitHandler}>Submit</button>
                 </form>
             </div>
             {todos.map((item,index) => {
+                console.log(item);
               return( 
+              <div >    
               <Todo 
               key={index} 
               {...item} 
               />
+              </div>
               )
             })}
         </div>

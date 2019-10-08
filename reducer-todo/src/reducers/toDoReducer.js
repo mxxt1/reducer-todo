@@ -11,6 +11,7 @@ export const initialState = {
 };
 
 
+
 export const reducer = (state, action) => {
     switch(action.type) {
         case 'ADD_TODO':
@@ -19,11 +20,19 @@ export const reducer = (state, action) => {
                 completed: false, 
                 id: Date.now()
             }
+            console.log(state);
+            
             return {
                 ...state,
                 todos: [...state.todos, newTodo]
-                //the payload
             };
+        case 'TOGGLE_COMPLETED':
+            console.log(`Toggled`);
+
+            return {
+                ...state,
+                todos: [...state.todos, action.payload]
+            }
         default:
             return state;
 
