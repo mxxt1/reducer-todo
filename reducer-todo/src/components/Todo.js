@@ -13,6 +13,12 @@ const Todo = (props) => {
     }
 
 
+    const removeHandler = event => {
+        event.preventDefault();
+        props.dispatch({type: 'REMOVE_TODO', payload: props.todo.id})
+    }
+
+
     return (
         <div onClick={toggleHandler}>
             
@@ -24,8 +30,7 @@ const Todo = (props) => {
             ):(
             <h3>Incomplete</h3>    
             )}
-            
-
+            <button onClick={removeHandler}>Remove</button>
         </div>
     )
 }
