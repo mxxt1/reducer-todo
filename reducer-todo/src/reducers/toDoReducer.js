@@ -1,18 +1,19 @@
 //Initial state
 
-export const initialState = {
-    todos: [
-        {
+export const initialState = [
+    {
             item: 'Seed ToDo',
             completed: false,
             id: Date.now()
         }
-    ]
-};
+    
+    ];
 
 
 
 export const reducer = (state, action) => {
+    console.log(state);
+
     switch(action.type) {
         case 'ADD_TODO':
             const newTodo = {
@@ -22,17 +23,21 @@ export const reducer = (state, action) => {
             }
             console.log(state);
             
-            return {
+            return [
                 ...state,
-                todos: [...state.todos, newTodo]
-            };
+                newTodo
+             ];
         case 'TOGGLE_COMPLETED':
             console.log(`Toggled`);
-
-            return {
-                ...state,
-                todos: [...state.todos, action.payload]
-            }
+           return state.map(item => {
+               console.log(item);
+                if (item.id === action.payload){
+                    return{...item, completed: !item.completed}; 
+                } else {
+                    return item;
+                }
+            });
+           
         default:
             return state;
 

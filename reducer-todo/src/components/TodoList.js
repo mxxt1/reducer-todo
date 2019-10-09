@@ -4,11 +4,10 @@ import Todo from './Todo';
 
 const TodoList = () => {
 
-    const [{todos}, dispatch] = useReducer(reducer, initialState);
+    const [todoList, dispatch] = useReducer(reducer, initialState);
     const [newTodo, setNewTodo] = useState(''); 
-    const [toggleItem, setToggleItem] = useState('');
 
-        console.log(todos);
+        console.log(todoList);
 
     const changeHandler = event =>{
         setNewTodo(event.target.value)
@@ -24,8 +23,7 @@ const TodoList = () => {
     //     event.preventDefault();
     //     // setToggleItem(item.id);
     //     // console.log(toggleItem);
-    //     dispatch({type:'TOGGLE_COMPLETED', dispatch:toggleItem});
-    //     setToggleItem('');
+    //     dispatch({type:'TOGGLE_COMPLETED', payload: item.id});
     // }
 
 
@@ -41,17 +39,17 @@ const TodoList = () => {
                     value={newTodo}
                     onChange={changeHandler}
                 />
-
                 <button onClick={submitHandler}>Submit</button>
                 </form>
             </div>
-            {todos.map((item,index) => {
+            {todoList.map((item,index) => {
                 console.log(item);
               return( 
-              <div >    
+              <div key={index}>    
               <Todo 
-              key={index} 
-              {...item} 
+              key={index}
+              dispatch={dispatch} 
+              todo={item} 
               />
               </div>
               )
